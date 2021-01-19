@@ -39,11 +39,16 @@ if [ $# -lt 2 ]; then
 	exit
 fi
 
-if [ $# -gt 2 ]; then
+if [ $# -gt 3 ]; then
 	echo "WARN: Some arguments are not used"
 fi
 
-gcloud app deploy "${tmp_dir}/WEB-INF/appengine-web.xml" --project="${1}" --version="${2}" --no-promote --quiet
+PROMOTE_FLAG='--no-promote'
+if [ $3 -eq 'promote' ]; then
+	PROMOTE_FLAG='--promote'
+fi
+
+gcloud app deploy "${tmp_dir}/WEB-INF/appengine-web.xml" --project="${1}" --version="${2}" "${PROMOTE_FLAG}"  --quiet
 retCode=$?
 
 rm -rf ${tmp_dir}
