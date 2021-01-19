@@ -44,7 +44,7 @@ if [ $# -gt 3 ]; then
 fi
 
 PROMOTE_FLAG='--no-promote'
-if [ $3 -eq 'promote' ]; then
+if [ "${3}" == 'promote' ]; then
 	PROMOTE_FLAG='--promote'
 fi
 
